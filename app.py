@@ -65,3 +65,23 @@ HOME = """
       </body>
       </html>
       """
+
+      @app.route('/')
+     def home():
+         return render_template_string(HOME_HTML)
+
+@app.route('/proxy')
+def proxy():
+    target_url = request.args.get('url')
+    if not target_url:
+        return "Please provide a URL parameter.", 400
+
+Try:
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
+    response = requests.get(target_url, headers=headers, timeout=10)
+    return response.text
+except Exception as e:
+    return f"Error loading the site: {str(e)}", 500
+
+if __name__ == '_main_':
+    app.run(debug=True, port=5000
