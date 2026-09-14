@@ -73,14 +73,15 @@ def home():
 @app.route('/proxy')
 def proxy():
     target_url = request.args.get('url')
+   
     if not target_url:
         return "Please provide a URL parameter.", 400
 
-Try:
+    try:
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
     response = requests.get(target_url, headers=headers, timeout=10)
     return response.text
-except Exception as e:
+    except Exception as e:
     return f"Error loading the site: {str(e)}", 500
 
 if __name__ == '_main_':
