@@ -66,9 +66,9 @@ HOME = """
       </html>
       """
 
-      @app.route('/')
-     def home():
-         return render_template_string(HOME_HTML)
+@app.route('/')
+def home():
+    return render_template_string(HOME_HTML)
 
 @app.route('/proxy')
 def proxy():
